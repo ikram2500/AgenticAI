@@ -1,21 +1,23 @@
-# LangChain Agent
+# AgenticAI
+This repository contains some practice projects of agentic AI.
 
-Minimal Python project scaffold.
+## LangChain Agent (this folder)
+Minimal Python scaffold for an agent.
 
-## Requirements
+### Requirements
 - Python 3.12+
 
-## Setup
+### Setup
 ```bash
 python -m venv .venv
 .venv\\Scripts\\activate
 pip install -U pip
 ```
 
-## Run
+### Run
 ```bash
 python main.py
 ```
 
-## Project Metadata
+### Project Metadata
 - Configured via `pyproject.toml`.
