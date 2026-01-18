@@ -1,0 +1,6 @@
+autogen-agentchat==0.5.7
+autogen-ext[openai]==0.5.7
+python-dotenv
+autogen-core==0.5.7
+pydantic==2.10.3
+pydantic-settings==2.12.0
