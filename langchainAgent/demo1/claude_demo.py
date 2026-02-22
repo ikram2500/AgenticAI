@@ -5,7 +5,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain.agents import create_agent
-from tools import search
+from tools import search, wikipedia_search
 
 load_dotenv() 
 
@@ -35,7 +35,7 @@ prompt = ChatPromptTemplate.from_messages (
 
 
 
-tools = [search]
+tools = [search, wikipedia_search]
 agent = create_agent(
     model=llm,
     tools=tools,
