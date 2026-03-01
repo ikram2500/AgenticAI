@@ -1,0 +1,1 @@
+conda create -n venv python=3.12
