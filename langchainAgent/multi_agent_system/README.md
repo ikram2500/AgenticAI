@@ -1,2 +1,3 @@
+
 prompts to generate a folder structure 
 'So first of all, i just want to tell you , i am crating a multi-agent research system in which I have two tools. The first tool will be of tavli, second tool will be of BeautifulSoup, and then I am ging to create two agents using OpenAi API key, and all those agents will be connected with these two tools. And then I am also going to use React agen, create React agent inside this, and also I am going to use chains. So it is going to be a full-fledged project. So i'm not going to use chain, i am going to use LCLE pipeline using Runnables, okay? So i just want you to give me a requirements.txt file. Inside that requirements.txt file everything must be included that we actually need to create the project, okay? 
