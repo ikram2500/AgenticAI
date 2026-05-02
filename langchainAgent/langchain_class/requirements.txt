@@ -3,3 +3,5 @@ langchain_google_genai
 python-dotenv
 langchain_core 
 pydantic
+langchain_huggingface 
+sentence-transformers
