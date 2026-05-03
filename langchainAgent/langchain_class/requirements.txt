@@ -6,3 +6,5 @@ pydantic
 langchain_huggingface 
 sentence-transformers 
 faiss-cpu 
+pypdf
+bs4
