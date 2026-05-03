@@ -4,4 +4,5 @@ python-dotenv
 langchain_core 
 pydantic
 langchain_huggingface 
-sentence-transformers
+sentence-transformers 
+faiss-cpu 
