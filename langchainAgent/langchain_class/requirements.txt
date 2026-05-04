@@ -8,3 +8,5 @@ sentence-transformers
 faiss-cpu 
 pypdf
 bs4
+langchain-chroma
+wikipedia
