@@ -9,3 +9,8 @@ def multiply(a:int, b: int):
 result = multiply.invoke({"a":4, "b":5})
 
 print(result)
+print(multiply.name)
+print(multiply.description)
+print(multiply.args)
+
+print(multiply.args_schema.model_json_schema())
