@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os 
 import certifi 
 
-load_dotenv()
+load_dotenv(override=True)
 
 os.environ["SSL_CERT_FILE"] = certifi.where()
 os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()

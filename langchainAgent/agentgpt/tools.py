@@ -6,7 +6,7 @@ from database import search_memory, save_memory
 from rag import retrieve_from_rag
 
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 CURRENT_THREAD_ID = "default"

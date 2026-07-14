@@ -4,7 +4,8 @@ import sqlite3
 from dotenv import load_dotenv 
 import certifi 
 
-load_dotenv()
+# Use the current project key even when an older key exists in the terminal.
+load_dotenv(override=True)
 
 os.environ["SSL_CERT_FILE"] = certifi.where()
 os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
@@ -21,7 +22,10 @@ Path("data").mkdir(exist_ok=True)
 
 
 # Update default and allowed models to use Gemini 2.5
-DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+DEFAULT_MODEL = os.getenv(
+    "GEMINI_MODEL",
+    os.getenv("GOOGLE_MODEL", "gemini-2.5-flash"),
+)
 
 ALLOWED_MODELS = {
     "gemini-2.5-flash",
@@ -99,23 +103,39 @@ def build_agent(model_name: str ):
         return {
             "messages" : [response]
         }
+
+    tool_node = ToolNode(tools)
+
+    workflow = StateGraph(MessagesState)
+
+    workflow.add_node("chatbot", chatbot_node)
+    workflow.add_node("tools", tool_node)
+
+    workflow.add_edge(START, "chatbot")
+    workflow.add_conditional_edges("chatbot", tools_condition)
+    workflow.add_edge("tools", "chatbot")
+
+    conn = sqlite3.connect(
+        "data/langraph_checkpoints.sqlite",
+        check_same_thread=False,
+    )
+
+    checkpointer = SqliteSaver(conn)
+
+    return workflow.compile(checkpointer=checkpointer)
     
-        tool_node = ToolNode(tools)
 
-        workflow = StateGraph(MessagesState)
+_AGENT_CACHE = {}
 
-        workflow.add_node("chatbot", chatbot_node)
-        workflow.add_node("tools", tool_node)
+def get_agent(model_name: str | None = None):
+    """
+    Return cached LangGraph agent for selected model.
+    If not created yet, create it once and reuse it.
+    """
 
-        workflow.add_edge(START, "chatbot")
-        workflow.add_conditional_edges("chatbot", tools_condition)
-        workflow.add_edge("tools", "chatbot")
+    selected_model = normalize_model_name(model_name)
 
-        conn = sqlite3.connect(
-            "data/langraph_checkpoints.sqlite",
-            check_same_thread = False 
-        )
+    if selected_model not in _AGENT_CACHE:
+        _AGENT_CACHE[selected_model] = build_agent(selected_model)
 
-        checkpointer = SqliteSaver(conn)
-        
-        return workflow.compile(checkpointer=checkpointer)
+    return _AGENT_CACHE[selected_model]
