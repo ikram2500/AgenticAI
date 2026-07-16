@@ -204,6 +204,7 @@ Example full ECR image URI:
 
 ```text
 759302161952.dkr.ecr.us-east-1.amazonaws.com/agentgptecr
+759302161952.dkr.ecr.us-east-1.amazonaws.com/agentgptecr
 ```
 
 For GitHub Secrets, only save the repository name:
