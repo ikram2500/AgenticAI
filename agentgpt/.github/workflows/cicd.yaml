@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - 'AgenticAI/agentgpt/**' # Triggers only when files inside agentgpt change
+      - 'agentgpt/**' # CORRECTED: Relative to repo root
 
 jobs:
   deploy:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: ./AgenticAI/agentgpt
+        working-directory: ./agentgpt # CORRECTED: Relative to repo root
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
